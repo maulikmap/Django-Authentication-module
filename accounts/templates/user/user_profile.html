@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block css %}
+<style>
+    .h1-text {
+        font-size: 26px;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+
+    .h2-text {
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+
+    .p-text {
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+</style>
+{% endblock css %}
+
+{% block loginstatus %}
+
+<div class="dropdown text-end">
+    {% if user.full_name %}
+      <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{user.full_name}}
+      </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" href="{% url 'user_profile' %}">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="{% url 'logout_view' %}">Sign out</a></li>
+        </ul>
+      
+    {% else %}
+    <a href="{% url 'login_view' %}" class="btn btn-sm btn-primary btn-block">Login</a>
+    <a href="{% url 'register_view' %}" class="btn btn-sm btn-success btn-block">Create New Account</a>
+    {% endif %}
+</div>
+
+{% endblock loginstatus %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-lg-9 col-md-9 col-sm-6">
+            <h5 class="h1-text mt-3">User Profile</h5>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6"></div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-12 col-md-12 col-sm-6 table-responsive">
+            <form action="{% url 'user_profile' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="form-group">
+                            {% if userProfile.photo %}
+                            <img class="rounded-circle" src="{{userProfile.photo.url}}" alt="" width="100" height="100">
+                            {% else %}
+                            <img class="rounded-circle" src="{% static 'assets/brand/avatar.jpg' %}" alt="" width="100"
+                                height="100">
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {% if user.status %}
+                            <span class="h2-text">Status</span> :
+                            {% if user.status == 1 %}
+                            <span class="badge badge-pill badge-warning p-text">
+                                Pending
+                            </span>
+                            {% elif user.status == 2 %}
+                            <span class="badge badge-pill badge-success p-text">
+                                Approved
+                            </span>
+                            {% elif user.status == 3 %}
+                            <span class="badge badge-pill badge-danger p-text">
+                                Rejected
+                            </span>
+                            {% endif %}
+                            {% endif %}
+                            <br>
+                            <span class="h2-text">Full Name</span> :
+                            <span class="p-text">
+                                {{user.full_name}}
+                            </span>
+                            <br>
+                            <span class="h2-text">Email</span> :
+                            <span class="p-text">
+                                {{user.email}}
+                            </span>
+                            <br>
+                            <span class="h2-text">Phone</span> :
+                            <span class="p-text">
+                                {{userProfile.phone}}
+                            </span>
+                            <br>
+                            <span class="h2-text">Address</span> :
+                            <span class="p-text">
+                                {{userProfile.address}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        {{userForm|crispy}}
+                        {{userProfileForm|crispy}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

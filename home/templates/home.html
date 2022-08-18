@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block loginstatus %}
+
+<div class="dropdown text-end">
+    {% if request.session.uid %}
+      <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{user.full_name}}
+      </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" href="{% url 'user_profile' %}">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="{% url 'logout_view' %}">Sign out</a></li>
+        </ul>
+      
+    {% else %}
+    <a href="{% url 'login_view' %}" class="btn btn-sm btn-primary btn-block">Login</a>
+    <a href="{% url 'register_view' %}" class="btn btn-sm btn-success btn-block">Create New Account</a>
+    {% endif %}
+</div>
+
+{% endblock loginstatus %}
+
+{% block content %}
+
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+<h1>Home page</h1>
+
+{% endblock %} 
