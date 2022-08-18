@@ -1,4 +1,4 @@
-#Django Authentication Module with included in blog Application.
+**Django Authentication Module with included in blog Application.**
 
 It contains facilities for user to create new account and login.
 
