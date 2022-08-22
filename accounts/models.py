@@ -63,7 +63,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         if self.email:
             return self.email
         else:
-            return "No Email Address"
+            return "No Email Address Found"
 
     
     @staticmethod
@@ -75,7 +75,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class UserProfile(models.Model):
-    """ User Profile model. """
+    """ User Profile model """
 
     user = models.OneToOneField(CustomUser, on_delete = models.CASCADE, related_name="user_profile")
     address = models.CharField(max_length=1000, default="", blank=True, null=True)
